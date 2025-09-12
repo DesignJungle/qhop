@@ -1,0 +1,118 @@
+.qhop-button {
+  --border-radius: var(--qhop-radius-md);
+  font-family: var(--qhop-font-family);
+  font-weight: 500;
+  transition: all 0.2s ease;
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+.qhop-button--small {
+  --padding-top: var(--qhop-space-2);
+  --padding-bottom: var(--qhop-space-2);
+  --padding-start: var(--qhop-space-3);
+  --padding-end: var(--qhop-space-3);
+  font-size: var(--qhop-text-secondary);
+  height: 32px;
+}
+
+.qhop-button--medium {
+  --padding-top: var(--qhop-space-3);
+  --padding-bottom: var(--qhop-space-3);
+  --padding-start: var(--qhop-space-4);
+  --padding-end: var(--qhop-space-4);
+  font-size: var(--qhop-text-body);
+  height: 44px;
+}
+
+.qhop-button--large {
+  --padding-top: var(--qhop-space-4);
+  --padding-bottom: var(--qhop-space-4);
+  --padding-start: var(--qhop-space-6);
+  --padding-end: var(--qhop-space-6);
+  font-size: var(--qhop-text-h3);
+  height: 52px;
+}
+
+.qhop-button--full-width {
+  width: 100%;
+}
+
+/* Primary Button */
+.qhop-button--primary {
+  --background: var(--qhop-primary-600);
+  --background-hover: var(--qhop-primary-700);
+  --background-activated: var(--qhop-primary-700);
+  --color: var(--qhop-surface-0);
+  --box-shadow: var(--qhop-shadow-sm);
+}
+
+.qhop-button--primary:hover {
+  --box-shadow: var(--qhop-shadow-md);
+}
+
+/* Secondary Button */
+.qhop-button--secondary {
+  --border-color: var(--qhop-primary-600);
+  --border-width: 1px;
+  --color: var(--qhop-primary-600);
+  --background: transparent;
+  --background-hover: var(--qhop-primary-600);
+  --background-activated: var(--qhop-primary-600);
+  --color-hover: var(--qhop-surface-0);
+  --color-activated: var(--qhop-surface-0);
+}
+
+/* Ghost Button */
+.qhop-button--ghost {
+  --background: transparent;
+  --background-hover: var(--qhop-canvas-50);
+  --background-activated: var(--qhop-line-200);
+  --color: var(--qhop-primary-600);
+}
+
+/* Destructive Button */
+.qhop-button--destructive {
+  --background: var(--qhop-danger-500);
+  --background-hover: #DC2626;
+  --background-activated: #DC2626;
+  --color: var(--qhop-surface-0);
+  --box-shadow: var(--qhop-shadow-sm);
+}
+
+.qhop-button--destructive:hover {
+  --box-shadow: var(--qhop-shadow-md);
+}
+
+/* Loading State */
+.qhop-button__loading {
+  display: flex;
+  align-items: center;
+  gap: var(--qhop-space-2);
+}
+
+.qhop-button__spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid transparent;
+  border-top: 2px solid currentColor;
+  border-radius: 50%;
+  animation: qhop-spin 1s linear infinite;
+}
+
+@keyframes qhop-spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Disabled State */
+.qhop-button[disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Focus States */
+.qhop-button:focus {
+  outline: 2px solid var(--qhop-primary-600);
+  outline-offset: 2px;
+}

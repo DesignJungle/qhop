@@ -1,0 +1,199 @@
+/* QHop Design System Variables */
+
+/** QHop Color Palette **/
+:root {
+  /* Primary Colors */
+  --qhop-primary-600: #0B72E7;
+  --qhop-primary-700: #085AC0;
+
+  /* Accent Colors */
+  --qhop-accent-500: #22C55E;
+  --qhop-warning-500: #F59E0B;
+  --qhop-danger-500: #EF4444;
+
+  /* Text Colors */
+  --qhop-ink-900: #0F172A;
+  --qhop-ink-700: #334155;
+  --qhop-muted-400: #94A3B8;
+
+  /* Surface Colors */
+  --qhop-line-200: #E2E8F0;
+  --qhop-canvas-50: #F8FAFC;
+  --qhop-surface-0: #FFFFFF;
+
+  /* Spacing Scale (4pt base) */
+  --qhop-space-1: 4px;
+  --qhop-space-2: 8px;
+  --qhop-space-3: 12px;
+  --qhop-space-4: 16px;
+  --qhop-space-5: 20px;
+  --qhop-space-6: 24px;
+  --qhop-space-8: 32px;
+  --qhop-space-10: 40px;
+
+  /* Border Radius */
+  --qhop-radius-sm: 8px;
+  --qhop-radius-md: 12px;
+  --qhop-radius-lg: 16px;
+  --qhop-radius-xl: 24px;
+
+  /* Typography */
+  --qhop-font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --qhop-font-display: 'Sora', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+  /* Font Sizes */
+  --qhop-text-display: 28px;
+  --qhop-text-h1: 24px;
+  --qhop-text-h2: 20px;
+  --qhop-text-h3: 18px;
+  --qhop-text-body: 16px;
+  --qhop-text-secondary: 14px;
+  --qhop-text-caption: 12px;
+
+  /* Line Heights */
+  --qhop-leading-display: 34px;
+  --qhop-leading-h1: 30px;
+  --qhop-leading-h2: 28px;
+  --qhop-leading-h3: 24px;
+  --qhop-leading-body: 24px;
+  --qhop-leading-secondary: 20px;
+  --qhop-leading-caption: 16px;
+
+  /* Shadows */
+  --qhop-shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --qhop-shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --qhop-shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --qhop-shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+
+  /** Map QHop colors to Ionic variables **/
+  --ion-color-primary: var(--qhop-primary-600);
+  --ion-color-primary-rgb: 11, 114, 231;
+  --ion-color-primary-contrast: var(--qhop-surface-0);
+  --ion-color-primary-contrast-rgb: 255, 255, 255;
+  --ion-color-primary-shade: var(--qhop-primary-700);
+  --ion-color-primary-tint: #1F7FEA;
+
+  --ion-color-success: var(--qhop-accent-500);
+  --ion-color-success-rgb: 34, 197, 94;
+  --ion-color-success-contrast: var(--qhop-surface-0);
+  --ion-color-success-contrast-rgb: 255, 255, 255;
+  --ion-color-success-shade: #16A34A;
+  --ion-color-success-tint: #4ADE80;
+
+  --ion-color-warning: var(--qhop-warning-500);
+  --ion-color-warning-rgb: 245, 158, 11;
+  --ion-color-warning-contrast: var(--qhop-ink-900);
+  --ion-color-warning-contrast-rgb: 15, 23, 42;
+  --ion-color-warning-shade: #D97706;
+  --ion-color-warning-tint: #F59E0B;
+
+  --ion-color-danger: var(--qhop-danger-500);
+  --ion-color-danger-rgb: 239, 68, 68;
+  --ion-color-danger-contrast: var(--qhop-surface-0);
+  --ion-color-danger-contrast-rgb: 255, 255, 255;
+  --ion-color-danger-shade: #DC2626;
+  --ion-color-danger-tint: #F87171;
+
+  --ion-color-medium: var(--qhop-muted-400);
+  --ion-color-medium-rgb: 148, 163, 184;
+  --ion-color-medium-contrast: var(--qhop-ink-900);
+  --ion-color-medium-contrast-rgb: 15, 23, 42;
+  --ion-color-medium-shade: #64748B;
+  --ion-color-medium-tint: #CBD5E1;
+
+  --ion-color-light: var(--qhop-canvas-50);
+  --ion-color-light-rgb: 248, 250, 252;
+  --ion-color-light-contrast: var(--qhop-ink-900);
+  --ion-color-light-contrast-rgb: 15, 23, 42;
+  --ion-color-light-shade: var(--qhop-line-200);
+  --ion-color-light-tint: var(--qhop-surface-0);
+
+  --ion-color-dark: var(--qhop-ink-900);
+  --ion-color-dark-rgb: 15, 23, 42;
+  --ion-color-dark-contrast: var(--qhop-surface-0);
+  --ion-color-dark-contrast-rgb: 255, 255, 255;
+  --ion-color-dark-shade: #0F172A;
+  --ion-color-dark-tint: var(--qhop-ink-700);
+
+  /* Background and text colors */
+  --ion-background-color: var(--qhop-canvas-50);
+  --ion-text-color: var(--qhop-ink-900);
+  --ion-text-color-rgb: 15, 23, 42;
+
+  /* Typography overrides */
+  --ion-font-family: var(--qhop-font-family);
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* Dark mode color adjustments */
+    --qhop-canvas-50: #0F172A;
+    --qhop-surface-0: #1E293B;
+    --qhop-line-200: #334155;
+    --qhop-ink-900: #F8FAFC;
+    --qhop-ink-700: #E2E8F0;
+    --qhop-muted-400: #64748B;
+
+    /* Update Ionic variables for dark mode */
+    --ion-background-color: var(--qhop-canvas-50);
+    --ion-text-color: var(--qhop-ink-900);
+    --ion-text-color-rgb: 248, 250, 252;
+
+    --ion-color-light: var(--qhop-surface-0);
+    --ion-color-light-rgb: 30, 41, 59;
+    --ion-color-light-contrast: var(--qhop-ink-900);
+    --ion-color-light-contrast-rgb: 248, 250, 252;
+
+    --ion-color-medium: var(--qhop-muted-400);
+    --ion-color-medium-rgb: 100, 116, 139;
+    --ion-color-medium-contrast: var(--qhop-ink-900);
+    --ion-color-medium-contrast-rgb: 248, 250, 252;
+  }
+}
+
+/* Utility Classes */
+.qhop-text-display {
+  font-family: var(--qhop-font-display);
+  font-size: var(--qhop-text-display);
+  line-height: var(--qhop-leading-display);
+  font-weight: 600;
+}
+
+.qhop-text-h1 {
+  font-size: var(--qhop-text-h1);
+  line-height: var(--qhop-leading-h1);
+  font-weight: 600;
+}
+
+.qhop-text-h2 {
+  font-size: var(--qhop-text-h2);
+  line-height: var(--qhop-leading-h2);
+  font-weight: 500;
+}
+
+.qhop-text-h3 {
+  font-size: var(--qhop-text-h3);
+  line-height: var(--qhop-leading-h3);
+  font-weight: 500;
+}
+
+.qhop-text-body {
+  font-size: var(--qhop-text-body);
+  line-height: var(--qhop-leading-body);
+  font-weight: 400;
+}
+
+.qhop-text-secondary {
+  font-size: var(--qhop-text-secondary);
+  line-height: var(--qhop-leading-secondary);
+  font-weight: 400;
+  color: var(--qhop-muted-400);
+}
+
+.qhop-text-caption {
+  font-size: var(--qhop-text-caption);
+  line-height: var(--qhop-leading-caption);
+  font-weight: 400;
+  color: var(--qhop-muted-400);
+}

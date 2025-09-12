@@ -1,0 +1,255 @@
+.qhop-business-detail-content {
+  --background: var(--qhop-canvas-50);
+  padding: var(--qhop-space-4);
+}
+
+/* Business Header */
+.qhop-business-header-card {
+  margin-bottom: var(--qhop-space-4);
+}
+
+.qhop-business-header {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--qhop-space-4);
+}
+
+.qhop-business-avatar-large {
+  width: 80px;
+  height: 80px;
+  border-radius: var(--qhop-radius-lg);
+  background: var(--qhop-primary-600);
+  color: var(--qhop-surface-0);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: var(--qhop-text-h1);
+  flex-shrink: 0;
+}
+
+.qhop-business-info {
+  flex: 1;
+}
+
+.qhop-business-info h1 {
+  margin-bottom: var(--qhop-space-1);
+  color: var(--qhop-ink-900);
+}
+
+.qhop-business-rating {
+  display: flex;
+  align-items: center;
+  gap: var(--qhop-space-1);
+  margin-top: var(--qhop-space-2);
+  color: var(--qhop-warning-500);
+  font-weight: 500;
+}
+
+.qhop-business-rating ion-icon {
+  font-size: 16px;
+}
+
+/* Queue Status */
+.qhop-queue-status-card {
+  margin-bottom: var(--qhop-space-4);
+}
+
+.qhop-queue-stats {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: var(--qhop-space-4);
+  padding: var(--qhop-space-4);
+  background: var(--qhop-canvas-50);
+  border-radius: var(--qhop-radius-md);
+}
+
+.qhop-stat-item {
+  display: flex;
+  align-items: center;
+  gap: var(--qhop-space-2);
+  text-align: center;
+}
+
+.qhop-stat-item ion-icon {
+  font-size: 24px;
+  color: var(--qhop-primary-600);
+}
+
+.qhop-stat-item div {
+  display: flex;
+  flex-direction: column;
+  gap: var(--qhop-space-1);
+}
+
+.qhop-stat-item .qhop-text-h3 {
+  color: var(--qhop-ink-900);
+  font-weight: 600;
+}
+
+.qhop-stat-item .qhop-text-caption {
+  color: var(--qhop-muted-400);
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+/* Services */
+.qhop-service-item {
+  --padding-start: 0;
+  --padding-end: 0;
+  --inner-padding-end: 0;
+  margin-bottom: var(--qhop-space-2);
+}
+
+/* Business Details */
+.qhop-business-details {
+  margin-bottom: var(--qhop-space-4);
+}
+
+.qhop-detail-row {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--qhop-space-3);
+  margin-bottom: var(--qhop-space-3);
+}
+
+.qhop-detail-row ion-icon {
+  font-size: 20px;
+  color: var(--qhop-muted-400);
+  margin-top: 2px;
+  flex-shrink: 0;
+}
+
+.qhop-business-description {
+  margin-top: var(--qhop-space-4);
+  padding-top: var(--qhop-space-4);
+  border-top: 1px solid var(--qhop-line-200);
+}
+
+/* Features */
+.qhop-features-grid {
+  display: flex;
+  flex-direction: column;
+  gap: var(--qhop-space-4);
+}
+
+.qhop-feature-item {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--qhop-space-3);
+  padding: var(--qhop-space-3);
+  background: var(--qhop-canvas-50);
+  border-radius: var(--qhop-radius-md);
+}
+
+.qhop-feature-item ion-icon {
+  font-size: 24px;
+  color: var(--qhop-accent-500);
+  margin-top: 2px;
+}
+
+/* Join Section */
+.qhop-join-section {
+  position: sticky;
+  bottom: 0;
+  background: var(--qhop-surface-0);
+  padding: var(--qhop-space-4);
+  border-top: 1px solid var(--qhop-line-200);
+  margin: var(--qhop-space-4) calc(-1 * var(--qhop-space-4)) 0;
+}
+
+/* Join Modal */
+.qhop-join-modal-content {
+  --background: var(--qhop-canvas-50);
+  padding: var(--qhop-space-4);
+}
+
+.qhop-join-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--qhop-space-4);
+}
+
+.qhop-form-field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--qhop-space-2);
+}
+
+.qhop-form-field ion-label {
+  font-weight: 500;
+  color: var(--qhop-ink-700);
+}
+
+.qhop-service-summary {
+  padding: var(--qhop-space-3);
+  background: var(--qhop-canvas-50);
+  border-radius: var(--qhop-radius-md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--qhop-space-1);
+}
+
+.qhop-policies {
+  padding: var(--qhop-space-3);
+  background: var(--qhop-canvas-50);
+  border-radius: var(--qhop-radius-md);
+}
+
+.qhop-policies h3 {
+  margin-bottom: var(--qhop-space-2);
+  color: var(--qhop-ink-900);
+}
+
+.qhop-policy-item {
+  margin-bottom: var(--qhop-space-1);
+}
+
+.qhop-terms {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--qhop-space-3);
+}
+
+.qhop-terms-label {
+  font-size: var(--qhop-text-secondary);
+  color: var(--qhop-ink-700);
+  line-height: 1.4;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .qhop-business-detail-content {
+    padding: var(--qhop-space-3);
+  }
+  
+  .qhop-business-header {
+    flex-direction: column;
+    text-align: center;
+    gap: var(--qhop-space-3);
+  }
+  
+  .qhop-business-avatar-large {
+    align-self: center;
+  }
+  
+  .qhop-queue-stats {
+    flex-direction: column;
+    gap: var(--qhop-space-4);
+  }
+  
+  .qhop-stat-item {
+    justify-content: space-between;
+    text-align: left;
+  }
+  
+  .qhop-join-section {
+    margin-left: calc(-1 * var(--qhop-space-3));
+    margin-right: calc(-1 * var(--qhop-space-3));
+    padding: var(--qhop-space-3);
+  }
+  
+  .qhop-join-modal-content {
+    padding: var(--qhop-space-3);
+  }
+}

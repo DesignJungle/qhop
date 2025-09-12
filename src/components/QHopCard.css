@@ -1,0 +1,52 @@
+.qhop-card {
+  border-radius: var(--qhop-radius-lg);
+  margin: 0;
+  transition: all 0.2s ease;
+}
+
+.qhop-card--default {
+  box-shadow: var(--qhop-shadow-sm);
+  background: var(--qhop-surface-0);
+}
+
+.qhop-card--elevated {
+  box-shadow: var(--qhop-shadow-md);
+  background: var(--qhop-surface-0);
+}
+
+.qhop-card--outlined {
+  box-shadow: none;
+  border: 1px solid var(--qhop-line-200);
+  background: var(--qhop-surface-0);
+}
+
+.qhop-card--priority {
+  box-shadow: var(--qhop-shadow-md);
+  background: var(--qhop-surface-0);
+  border-left: 4px solid var(--qhop-primary-600);
+}
+
+.qhop-card[button="true"]:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--qhop-shadow-lg);
+}
+
+.qhop-card__title {
+  font-family: var(--qhop-font-family);
+  font-size: var(--qhop-text-h3);
+  font-weight: 600;
+  color: var(--qhop-ink-900);
+  margin-bottom: var(--qhop-space-2);
+}
+
+.qhop-card__content {
+  padding: var(--qhop-space-4);
+}
+
+.qhop-card ion-card-header {
+  padding: var(--qhop-space-4) var(--qhop-space-4) 0;
+}
+
+.qhop-card ion-card-content {
+  padding: var(--qhop-space-4);
+}

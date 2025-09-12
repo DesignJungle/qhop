@@ -141,8 +141,9 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 📞 Contact
 
-- **Project Link**: [https://github.com/yourusername/qhop](https://github.com/yourusername/qhop)
-- **Demo**: Coming Soon
+- **Project Link**: [https://github.com/DesignJungle/qhop](https://github.com/DesignJungle/qhop)
+- **Live Demo**: [https://designjungle.github.io/qhop](https://designjungle.github.io/qhop)
+- **Issues**: [Report bugs or request features](https://github.com/DesignJungle/qhop/issues)
 
 ---
 

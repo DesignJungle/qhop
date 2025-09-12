@@ -10,6 +10,7 @@ export default defineConfig({
     react(),
     legacy()
   ],
+  base: process.env.NODE_ENV === 'production' ? '/qhop/' : '/',
   test: {
     globals: true,
     environment: 'jsdom',

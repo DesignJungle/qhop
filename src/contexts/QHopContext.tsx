@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useReducer, useEffect, ReactNode } from 'react';
 import { queueService, Business, Ticket, NotificationData } from '../services/QueueService';
+import { authService } from '../services/AuthService';
 
 // State interface
 interface QHopState {
@@ -33,7 +34,8 @@ type QHopAction =
   | { type: 'ADD_NOTIFICATION'; payload: NotificationData }
   | { type: 'MARK_NOTIFICATION_READ'; payload: string }
   | { type: 'SET_USER'; payload: QHopState['user'] }
-  | { type: 'LOGOUT' };
+  | { type: 'LOGOUT' }
+  | { type: 'INIT_AUTH' };
 
 // Initial state
 const initialState: QHopState = {
@@ -133,6 +135,23 @@ function qhopReducer(state: QHopState, action: QHopAction): QHopState {
         ...initialState
       };
 
+    case 'INIT_AUTH':
+      // Initialize authentication state from stored session
+      const currentUser = authService.getCurrentUser();
+      if (currentUser) {
+        return {
+          ...state,
+          user: {
+            id: currentUser.id,
+            name: currentUser.name,
+            email: currentUser.email,
+            phone: currentUser.phone,
+            isAuthenticated: true
+          }
+        };
+      }
+      return state;
+
     default:
       return state;
   }
@@ -148,8 +167,8 @@ interface QHopContextType {
     joinQueue: (businessId: string, serviceId: string, partySize: number, acceptsTerms: boolean) => Promise<Ticket>;
     cancelTicket: (ticketId: string) => Promise<void>;
     markNotificationRead: (notificationId: string) => void;
-    login: (email: string, password: string) => Promise<void>;
-    logout: () => void;
+    setUser: (user: QHopState['user']) => void;
+    logout: () => Promise<void>;
   };
 }
 
@@ -163,6 +182,11 @@ interface QHopProviderProps {
 
 export const QHopProvider: React.FC<QHopProviderProps> = ({ children }) => {
   const [state, dispatch] = useReducer(qhopReducer, initialState);
+
+  // Initialize authentication on app start
+  useEffect(() => {
+    dispatch({ type: 'INIT_AUTH' });
+  }, []);
 
   // Actions
   const actions = {
@@ -253,18 +277,16 @@ export const QHopProvider: React.FC<QHopProviderProps> = ({ children }) => {
       dispatch({ type: 'MARK_NOTIFICATION_READ', payload: notificationId });
     },
 
-    login: async (email: string, password: string) => {
-      // Mock login - in real app, this would call authentication service
-      dispatch({ type: 'SET_USER', payload: {
-        id: 'user-1',
-        name: 'John Doe',
-        email,
-        phone: '+234 801 234 5678',
-        isAuthenticated: true
-      }});
+    setUser: (user: QHopState['user']) => {
+      dispatch({ type: 'SET_USER', payload: user });
     },
 
-    logout: () => {
+    logout: async () => {
+      try {
+        await authService.logout();
+      } catch (error) {
+        console.error('Logout error:', error);
+      }
       dispatch({ type: 'LOGOUT' });
       queueService.disconnectFromUpdates();
     }

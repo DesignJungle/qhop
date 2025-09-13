@@ -48,12 +48,7 @@ const Home: React.FC = () => {
     }
   }, [state.user.isAuthenticated]);
 
-  // Mock login for development
-  useEffect(() => {
-    if (!state.user.isAuthenticated) {
-      actions.login('john.doe@email.com', 'password');
-    }
-  }, []);
+
 
   const nearbyBusinesses = state.businesses.slice(0, 3); // Show first 3 businesses
   const activeQueues = state.activeTickets;

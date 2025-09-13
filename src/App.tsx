@@ -17,6 +17,8 @@ import Tickets from './pages/Tickets';
 import Notifications from './pages/Notifications';
 import Profile from './pages/Profile';
 import BusinessDetail from './pages/BusinessDetail';
+import AuthContainer from './components/auth/AuthContainer';
+import { QHopProvider, useQHop } from './contexts/QHopContext';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -50,8 +52,15 @@ import './theme/variables.css';
 
 setupIonicReact();
 
-const App: React.FC = () => (
-  <IonApp>
+// Main App Component with Authentication Guard
+const AppContent: React.FC = () => {
+  const { state } = useQHop();
+
+  if (!state.user.isAuthenticated) {
+    return <AuthContainer />;
+  }
+
+  return (
     <IonReactRouter>
       <IonTabs>
         <IonRouterOutlet>
@@ -101,6 +110,14 @@ const App: React.FC = () => (
         </IonTabBar>
       </IonTabs>
     </IonReactRouter>
+  );
+};
+
+const App: React.FC = () => (
+  <IonApp>
+    <QHopProvider>
+      <AppContent />
+    </QHopProvider>
   </IonApp>
 );
 

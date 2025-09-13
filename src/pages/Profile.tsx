@@ -31,9 +31,11 @@ import {
   chevronForwardOutline,
   businessOutline
 } from 'ionicons/icons';
+import { useQHop } from '../contexts/QHopContext';
 import './Profile.css';
 
 const Profile: React.FC = () => {
+  const { state, actions } = useQHop();
   const userStats = {
     totalVisits: 24,
     timeSaved: '4.2 hours',
@@ -71,9 +73,12 @@ const Profile: React.FC = () => {
     // In a real app, this would navigate to the appropriate page
   };
 
-  const handleLogout = () => {
-    console.log('Logout');
-    // In a real app, this would handle logout
+  const handleLogout = async () => {
+    try {
+      await actions.logout();
+    } catch (error) {
+      console.error('Logout failed:', error);
+    }
   };
 
   return (

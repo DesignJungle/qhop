@@ -1,0 +1,251 @@
+/* Business Login Styles */
+
+.business-login-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--qhop-space-4);
+  background: var(--qhop-gradient-primary-soft);
+}
+
+.business-login-card {
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  border-radius: var(--qhop-radius-lg);
+  overflow: hidden;
+}
+
+.business-auth-header {
+  text-align: center;
+  padding: var(--qhop-space-4) 0;
+}
+
+.business-auth-header .qhop-logo-fade-in {
+  margin-bottom: var(--qhop-space-4);
+}
+
+.business-auth-header ion-card-title {
+  color: var(--qhop-ink-900);
+  font-weight: 600;
+  margin-bottom: var(--qhop-space-2);
+}
+
+.business-auth-header p {
+  margin: 0;
+  color: var(--qhop-muted-500);
+}
+
+.business-login-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--qhop-space-4);
+}
+
+.auth-input-item {
+  --background: var(--qhop-surface-0);
+  --border-radius: var(--qhop-radius-md);
+  --padding-start: var(--qhop-space-4);
+  --padding-end: var(--qhop-space-4);
+  --inner-padding-end: 0;
+  margin-bottom: var(--qhop-space-3);
+  border: 1px solid var(--qhop-line-200);
+  border-radius: var(--qhop-radius-md);
+}
+
+.auth-input-item:focus-within {
+  border-color: var(--qhop-primary-600);
+  box-shadow: 0 0 0 3px rgba(255, 138, 61, 0.1);
+}
+
+.auth-input-item ion-label {
+  color: var(--qhop-ink-700);
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.auth-input-item ion-input {
+  --color: var(--qhop-ink-900);
+  --placeholder-color: var(--qhop-muted-400);
+  font-size: 16px;
+}
+
+.auth-options {
+  display: flex;
+  align-items: center;
+  gap: var(--qhop-space-2);
+  margin: var(--qhop-space-2) 0;
+}
+
+.remember-label {
+  color: var(--qhop-ink-700);
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.auth-submit-button {
+  --background: var(--qhop-gradient-primary);
+  --background-hover: var(--qhop-gradient-primary-reverse);
+  --color: white;
+  --border-radius: var(--qhop-radius-md);
+  height: 48px;
+  font-weight: 600;
+  margin: var(--qhop-space-3) 0;
+}
+
+.demo-button {
+  --border-color: var(--qhop-primary-600);
+  --color: var(--qhop-primary-600);
+  --border-radius: var(--qhop-radius-md);
+  height: 44px;
+  font-weight: 500;
+  margin-bottom: var(--qhop-space-3);
+}
+
+.demo-button:hover {
+  --background: var(--qhop-primary-50);
+}
+
+.auth-links {
+  text-align: center;
+  margin: var(--qhop-space-3) 0;
+}
+
+.auth-links ion-button {
+  --color: var(--qhop-primary-600);
+  font-size: 14px;
+}
+
+.auth-switch {
+  text-align: center;
+  margin: var(--qhop-space-5) 0 var(--qhop-space-4) 0;
+  padding-top: var(--qhop-space-4);
+  border-top: 1px solid var(--qhop-line-200);
+}
+
+.auth-switch p {
+  margin: 0;
+  font-size: 14px;
+}
+
+.switch-button {
+  --color: var(--qhop-accent-600);
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+.business-features {
+  background: var(--qhop-canvas-50);
+  padding: var(--qhop-space-4);
+  border-radius: var(--qhop-radius-md);
+  margin-top: var(--qhop-space-4);
+}
+
+.business-features h4 {
+  color: var(--qhop-ink-900);
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0 0 var(--qhop-space-3) 0;
+}
+
+.business-features ul {
+  margin: 0;
+  padding-left: var(--qhop-space-4);
+  color: var(--qhop-muted-500);
+}
+
+.business-features li {
+  margin-bottom: var(--qhop-space-1);
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+/* Responsive Design */
+@media (max-width: 480px) {
+  .business-login-container {
+    padding: var(--qhop-space-2);
+    align-items: flex-start;
+    padding-top: var(--qhop-space-6);
+  }
+
+  .business-login-card {
+    max-width: 100%;
+  }
+
+  .business-auth-header {
+    padding: var(--qhop-space-3) 0;
+  }
+}
+
+@media (min-width: 768px) {
+  .business-login-container {
+    padding: var(--qhop-space-8);
+  }
+
+  .business-login-card {
+    max-width: 520px;
+  }
+}
+
+/* Loading States */
+.auth-submit-button ion-spinner {
+  width: 20px;
+  height: 20px;
+}
+
+/* Focus States */
+ion-checkbox:focus-visible {
+  outline: 2px solid var(--qhop-primary-600);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Checkbox Styling */
+ion-checkbox {
+  --checkmark-color: white;
+  --background-checked: var(--qhop-primary-600);
+  --border-color-checked: var(--qhop-primary-600);
+}
+
+/* Button Hover Effects */
+.auth-submit-button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(255, 138, 61, 0.3);
+}
+
+.demo-button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(255, 138, 61, 0.1);
+}
+
+/* Animation for form elements */
+.auth-input-item {
+  transition: all 0.2s ease;
+}
+
+.auth-submit-button,
+.demo-button {
+  transition: all 0.2s ease;
+}
+
+/* Error states */
+.auth-input-item.error {
+  border-color: var(--qhop-danger-500);
+}
+
+.auth-input-item.error:focus-within {
+  border-color: var(--qhop-danger-500);
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
+}
+
+/* Success states */
+.auth-input-item.success {
+  border-color: var(--qhop-accent-500);
+}
+
+.auth-input-item.success:focus-within {
+  border-color: var(--qhop-accent-500);
+  box-shadow: 0 0 0 3px rgba(78, 205, 196, 0.1);
+}

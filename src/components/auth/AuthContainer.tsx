@@ -5,7 +5,11 @@ import { useQHop } from '../../contexts/QHopContext';
 
 type AuthStep = 'phone' | 'otp';
 
-const AuthContainer: React.FC = () => {
+interface AuthContainerProps {
+  onSwitchToBusiness?: () => void;
+}
+
+const AuthContainer: React.FC<AuthContainerProps> = ({ onSwitchToBusiness }) => {
   const [currentStep, setCurrentStep] = useState<AuthStep>('phone');
   const [phoneNumber, setPhoneNumber] = useState('');
   const [sessionId, setSessionId] = useState('');
@@ -44,7 +48,10 @@ const AuthContainer: React.FC = () => {
   return (
     <div className="qhop-auth-container">
       {currentStep === 'phone' && (
-        <PhoneLogin onOTPRequested={handleOTPRequested} />
+        <PhoneLogin
+          onOTPRequested={handleOTPRequested}
+          onSwitchToBusiness={onSwitchToBusiness}
+        />
       )}
       
       {currentStep === 'otp' && (

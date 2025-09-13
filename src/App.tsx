@@ -1,3 +1,4 @@
+import React, { useState } from 'react';
 import { Redirect, Route } from 'react-router-dom';
 import {
   IonApp,
@@ -10,15 +11,18 @@ import {
   setupIonicReact
 } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
-import { home, search, ticket, notifications, person } from 'ionicons/icons';
+import { home, search, ticket, notifications, person, business } from 'ionicons/icons';
 import Home from './pages/Home';
 import Search from './pages/Search';
 import Tickets from './pages/Tickets';
 import Notifications from './pages/Notifications';
 import Profile from './pages/Profile';
 import BusinessDetail from './pages/BusinessDetail';
+import BusinessDashboard from './pages/BusinessDashboard';
 import AuthContainer from './components/auth/AuthContainer';
+import BusinessLogin from './components/auth/BusinessLogin';
 import { QHopProvider, useQHop } from './contexts/QHopContext';
+import { BusinessOwner } from './services/BusinessService';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -52,12 +56,81 @@ import './theme/variables.css';
 
 setupIonicReact();
 
-// Main App Component with Authentication Guard
+// App Mode Types
+type AppMode = 'customer' | 'business';
+
+// Main App Component with Mode Selection and Authentication
 const AppContent: React.FC = () => {
   const { state } = useQHop();
+  const [appMode, setAppMode] = useState<AppMode>('customer');
+  const [businessOwner, setBusinessOwner] = useState<BusinessOwner | null>(null);
 
+  // Check for stored business owner session
+  React.useEffect(() => {
+    const storedOwner = localStorage.getItem('qhop_business_owner');
+    if (storedOwner) {
+      try {
+        const owner = JSON.parse(storedOwner);
+        setBusinessOwner(owner);
+        setAppMode('business');
+      } catch (error) {
+        console.error('Error parsing stored business owner:', error);
+        localStorage.removeItem('qhop_business_owner');
+      }
+    }
+  }, []);
+
+  const handleBusinessLogin = (owner: BusinessOwner) => {
+    setBusinessOwner(owner);
+    setAppMode('business');
+  };
+
+  const handleBusinessLogout = () => {
+    setBusinessOwner(null);
+    setAppMode('customer');
+    localStorage.removeItem('qhop_business_owner');
+  };
+
+  const handleSwitchToCustomer = () => {
+    setAppMode('customer');
+  };
+
+  const handleSwitchToBusiness = () => {
+    setAppMode('business');
+  };
+
+  // Business Mode - Show Business Dashboard
+  if (appMode === 'business') {
+    if (!businessOwner) {
+      return (
+        <BusinessLogin
+          onLoginSuccess={handleBusinessLogin}
+          onSwitchToCustomer={handleSwitchToCustomer}
+        />
+      );
+    }
+
+    return (
+      <IonReactRouter>
+        <IonRouterOutlet>
+          <Route exact path="/business/dashboard">
+            <BusinessDashboard />
+          </Route>
+          <Route exact path="/">
+            <Redirect to="/business/dashboard" />
+          </Route>
+        </IonRouterOutlet>
+      </IonReactRouter>
+    );
+  }
+
+  // Customer Mode - Show Customer App
   if (!state.user.isAuthenticated) {
-    return <AuthContainer />;
+    return (
+      <AuthContainer
+        onSwitchToBusiness={handleSwitchToBusiness}
+      />
+    );
   }
 
   return (

@@ -22,9 +22,10 @@ import '../brand/QHopLogo.css';
 
 interface PhoneLoginProps {
   onOTPRequested: (phone: string, sessionId: string) => void;
+  onSwitchToBusiness?: () => void;
 }
 
-const PhoneLogin: React.FC<PhoneLoginProps> = ({ onOTPRequested }) => {
+const PhoneLogin: React.FC<PhoneLoginProps> = ({ onOTPRequested, onSwitchToBusiness }) => {
   const [countryCode, setCountryCode] = useState('+234');
   const [phoneNumber, setPhoneNumber] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -193,6 +194,25 @@ const PhoneLogin: React.FC<PhoneLoginProps> = ({ onOTPRequested }) => {
         </IonCardContent>
       </IonCard>
 
+      {/* Business Portal Switch */}
+      {onSwitchToBusiness && (
+        <div className="qhop-auth-switch">
+          <IonText className="qhop-text-secondary">
+            <p>
+              Are you a business owner?{' '}
+              <IonButton
+                fill="clear"
+                size="small"
+                onClick={onSwitchToBusiness}
+                className="qhop-switch-button"
+              >
+                Business Portal
+              </IonButton>
+            </p>
+          </IonText>
+        </div>
+      )}
+
       <style>{`
         .qhop-phone-login {
           display: flex;
@@ -273,6 +293,23 @@ const PhoneLogin: React.FC<PhoneLoginProps> = ({ onOTPRequested }) => {
         .qhop-error-text {
           margin: var(--qhop-spacing-sm) 0;
           text-align: center;
+        }
+
+        .qhop-auth-switch {
+          text-align: center;
+          margin-top: var(--qhop-space-4);
+          padding: var(--qhop-space-3);
+        }
+
+        .qhop-auth-switch p {
+          margin: 0;
+          font-size: 14px;
+        }
+
+        .qhop-switch-button {
+          --color: var(--qhop-accent-600);
+          font-weight: 600;
+          text-decoration: underline;
         }
       `}</style>
     </div>

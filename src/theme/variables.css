@@ -1,25 +1,73 @@
 /* QHop Design System Variables */
 
-/** QHop Color Palette **/
+/** QHop Color Palette - Logo Inspired **/
 :root {
-  /* Primary Colors */
-  --qhop-primary-600: #0B72E7;
-  --qhop-primary-700: #085AC0;
+  /* Primary Colors - Orange (from logo gradient) */
+  --qhop-primary-50: #fff7ed;
+  --qhop-primary-100: #ffedd5;
+  --qhop-primary-200: #fed7aa;
+  --qhop-primary-300: #fdba74;
+  --qhop-primary-400: #fb923c;
+  --qhop-primary-500: #f97316;
+  --qhop-primary-600: #FF8A3D;
+  --qhop-primary-700: #c2410c;
+  --qhop-primary-800: #9a3412;
+  --qhop-primary-900: #7c2d12;
 
-  /* Accent Colors */
-  --qhop-accent-500: #22C55E;
+  /* Accent Colors - Teal (from logo gradient) */
+  --qhop-accent-50: #f0fdfa;
+  --qhop-accent-100: #ccfbf1;
+  --qhop-accent-200: #99f6e4;
+  --qhop-accent-300: #5eead4;
+  --qhop-accent-400: #2dd4bf;
+  --qhop-accent-500: #4ECDC4;
+  --qhop-accent-600: #0d9488;
+  --qhop-accent-700: #0f766e;
+  --qhop-accent-800: #115e59;
+  --qhop-accent-900: #134e4a;
+
+  /* Supporting Colors */
   --qhop-warning-500: #F59E0B;
   --qhop-danger-500: #EF4444;
+  --qhop-success-500: var(--qhop-accent-500);
 
-  /* Text Colors */
-  --qhop-ink-900: #0F172A;
-  --qhop-ink-700: #334155;
-  --qhop-muted-400: #94A3B8;
+  /* Brand Navy - From logo center */
+  --qhop-navy-50: #f8fafc;
+  --qhop-navy-100: #f1f5f9;
+  --qhop-navy-200: #e2e8f0;
+  --qhop-navy-300: #cbd5e1;
+  --qhop-navy-400: #94a3b8;
+  --qhop-navy-500: #64748b;
+  --qhop-navy-600: #475569;
+  --qhop-navy-700: #334155;
+  --qhop-navy-800: #2C3E50;
+  --qhop-navy-900: #0f172a;
 
-  /* Surface Colors */
-  --qhop-line-200: #E2E8F0;
-  --qhop-canvas-50: #F8FAFC;
+  /* Text Colors - Updated for brand consistency */
+  --qhop-ink-900: var(--qhop-navy-900);
+  --qhop-ink-700: var(--qhop-navy-700);
+  --qhop-ink-600: var(--qhop-navy-600);
+  --qhop-muted-500: var(--qhop-navy-500);
+  --qhop-muted-400: var(--qhop-navy-400);
+  --qhop-muted-300: var(--qhop-navy-300);
+
+  /* Surface Colors - Updated for brand consistency */
+  --qhop-line-200: var(--qhop-navy-200);
+  --qhop-canvas-50: var(--qhop-navy-50);
   --qhop-surface-0: #FFFFFF;
+
+  /* Brand Gradients - Inspired by logo */
+  --qhop-gradient-primary: linear-gradient(135deg, var(--qhop-primary-600) 0%, var(--qhop-accent-500) 100%);
+  --qhop-gradient-primary-soft: linear-gradient(135deg, var(--qhop-primary-100) 0%, var(--qhop-accent-100) 100%);
+  --qhop-gradient-primary-reverse: linear-gradient(135deg, var(--qhop-accent-500) 0%, var(--qhop-primary-600) 100%);
+  --qhop-gradient-navy: linear-gradient(135deg, var(--qhop-navy-800) 0%, var(--qhop-navy-600) 100%);
+
+  /* Logo Dimensions */
+  --qhop-logo-size-xs: 24px;
+  --qhop-logo-size-sm: 32px;
+  --qhop-logo-size-md: 48px;
+  --qhop-logo-size-lg: 64px;
+  --qhop-logo-size-xl: 128px;
 
   /* Spacing Scale (4pt base) */
   --qhop-space-1: 4px;

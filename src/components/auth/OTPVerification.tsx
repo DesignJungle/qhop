@@ -12,6 +12,7 @@ import {
 } from '@ionic/react';
 import { shieldCheckmarkOutline, arrowBackOutline, refreshOutline } from 'ionicons/icons';
 import { authService, type OTPVerification } from '../../services/AuthService';
+import QHopLogo from '../brand/QHopLogo';
 
 interface OTPVerificationProps {
   phone: string;
@@ -172,7 +173,7 @@ const OTPVerification: React.FC<OTPVerificationProps> = ({
               <IonIcon icon={arrowBackOutline} />
             </IonButton>
             
-            <IonIcon icon={shieldCheckmarkOutline} className="qhop-auth-icon" />
+            <QHopLogo size="md" variant="icon" className="qhop-logo-fade-in" />
             <IonCardTitle className="qhop-text-h2">Verify Your Phone</IonCardTitle>
             <IonText className="qhop-text-secondary">
               <p>Enter the 6-digit code sent to</p>
@@ -274,7 +275,7 @@ const OTPVerification: React.FC<OTPVerificationProps> = ({
           justify-content: center;
           min-height: 100vh;
           padding: var(--qhop-spacing-md);
-          background: linear-gradient(135deg, var(--qhop-primary-50) 0%, var(--qhop-accent-50) 100%);
+          background: var(--qhop-gradient-primary-soft);
         }
 
         .qhop-back-button {

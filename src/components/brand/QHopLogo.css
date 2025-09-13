@@ -1,0 +1,80 @@
+/* QHop Logo Component Styles */
+
+.qhop-logo {
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
+.qhop-logo svg {
+  display: block;
+}
+
+.qhop-logo-full {
+  align-items: center;
+  justify-content: center;
+}
+
+/* Logo animations */
+.qhop-logo-animated {
+  transition: transform 0.3s ease;
+}
+
+.qhop-logo-animated:hover {
+  transform: scale(1.05);
+}
+
+/* Logo variants for different backgrounds */
+.qhop-logo-on-dark {
+  --qhop-logo-text-color: #ffffff;
+}
+
+.qhop-logo-on-light {
+  --qhop-logo-text-color: var(--qhop-navy-800);
+}
+
+/* Responsive logo sizing */
+@media (max-width: 768px) {
+  .qhop-logo-responsive {
+    width: var(--qhop-logo-size-sm);
+    height: var(--qhop-logo-size-sm);
+  }
+}
+
+@media (max-width: 480px) {
+  .qhop-logo-responsive {
+    width: var(--qhop-logo-size-xs);
+    height: var(--qhop-logo-size-xs);
+  }
+}
+
+/* Logo loading animation */
+@keyframes qhop-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.qhop-logo-loading {
+  animation: qhop-logo-spin 2s linear infinite;
+}
+
+/* Logo fade-in animation */
+@keyframes qhop-logo-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.qhop-logo-fade-in {
+  animation: qhop-logo-fade-in 0.6s ease-out;
+}

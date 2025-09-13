@@ -28,6 +28,7 @@ import {
   carOutline
 } from 'ionicons/icons';
 import { useQHop } from '../contexts/QHopContext';
+import QHopLogo from '../components/brand/QHopLogo';
 import { useEffect } from 'react';
 import './Home.css';
 
@@ -57,13 +58,17 @@ const Home: React.FC = () => {
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <IonTitle className="qhop-text-h2">QHop</IonTitle>
+          <IonTitle className="qhop-text-h2">
+            <QHopLogo size="sm" variant="full" />
+          </IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen className="qhop-home-content">
         <IonHeader collapse="condense">
           <IonToolbar>
-            <IonTitle size="large" className="qhop-text-display">QHop</IonTitle>
+            <IonTitle size="large" className="qhop-text-display">
+              <QHopLogo size="md" variant="full" />
+            </IonTitle>
           </IonToolbar>
         </IonHeader>
         

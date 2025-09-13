@@ -17,6 +17,8 @@ import {
 } from '@ionic/react';
 import { phonePortraitOutline, shieldCheckmarkOutline } from 'ionicons/icons';
 import { authService, OTPRequest } from '../../services/AuthService';
+import QHopLogo from '../brand/QHopLogo';
+import '../brand/QHopLogo.css';
 
 interface PhoneLoginProps {
   onOTPRequested: (phone: string, sessionId: string) => void;
@@ -107,7 +109,7 @@ const PhoneLogin: React.FC<PhoneLoginProps> = ({ onOTPRequested }) => {
       <IonCard className="qhop-auth-card">
         <IonCardHeader>
           <div className="qhop-auth-header">
-            <IonIcon icon={phonePortraitOutline} className="qhop-auth-icon" />
+            <QHopLogo size="lg" variant="full" className="qhop-logo-fade-in" />
             <IonCardTitle className="qhop-text-h2">Welcome to QHop</IonCardTitle>
             <IonText className="qhop-text-secondary">
               <p>Enter your phone number to get started</p>
@@ -199,7 +201,7 @@ const PhoneLogin: React.FC<PhoneLoginProps> = ({ onOTPRequested }) => {
           justify-content: center;
           min-height: 100vh;
           padding: var(--qhop-spacing-md);
-          background: linear-gradient(135deg, var(--qhop-primary-50) 0%, var(--qhop-accent-50) 100%);
+          background: var(--qhop-gradient-primary-soft);
         }
 
         .qhop-auth-card {

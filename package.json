@@ -1,7 +1,19 @@
 {
   "name": "qhop",
-  "private": true,
-  "version": "0.0.0",
+  "private": false,
+  "version": "1.0.0",
+  "description": "QHop - Virtual Queue Management Platform. End waiting lines, everywhere.",
+  "keywords": ["queue-management", "virtual-queue", "ionic", "react", "typescript", "mobile-app", "pwa"],
+  "homepage": "https://designjungle.github.io/qhop",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/DesignJungle/qhop.git"
+  },
+  "bugs": {
+    "url": "https://github.com/DesignJungle/qhop/issues"
+  },
+  "author": "DesignJungle",
+  "license": "MIT",
   "type": "module",
   "scripts": {
     "dev": "vite",

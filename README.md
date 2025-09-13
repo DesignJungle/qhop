@@ -1,5 +1,13 @@
 # QHop - End Waiting Lines, Everywhere
 
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-QHop-blue?style=for-the-badge&logo=ionic)](https://designjungle.github.io/qhop)
+[![GitHub release](https://img.shields.io/github/v/release/DesignJungle/qhop?style=for-the-badge)](https://github.com/DesignJungle/qhop/releases)
+[![GitHub stars](https://img.shields.io/github/stars/DesignJungle/qhop?style=for-the-badge)](https://github.com/DesignJungle/qhop/stargazers)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
+[![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)](https://reactjs.org/)
+[![Ionic](https://img.shields.io/badge/Ionic-3880FF?style=for-the-badge&logo=ionic&logoColor=white)](https://ionicframework.com/)
+
 A cross-platform SaaS (mobile-first) that replaces physical queues with smart, virtual lines for clinics, barbers, salons, service centers, banks, eateries, and government offices.
 
 ## 🚀 Features

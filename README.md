@@ -10,29 +10,53 @@
 
 A cross-platform SaaS (mobile-first) that replaces physical queues with smart, virtual lines for clinics, barbers, salons, service centers, banks, eateries, and government offices.
 
-## 🚀 Features
+## ✨ **Key Features**
 
-### For Customers
-- **Smart Queue Joining**: Join queues remotely with real-time position updates
-- **Business Discovery**: Find and browse nearby businesses by category
-- **Live Notifications**: Get notified when it's your turn
-- **Service Selection**: Choose specific services and party size
-- **Progress Tracking**: Visual progress indicators and ETA calculations
+### 👥 **For Customers**
+- **📱 Phone-Based Authentication** - Quick OTP verification, no app downloads required
+- **🎯 Smart Queue Joining** - Join queues instantly with QR codes or business search
+- **⏱️ Real-Time Updates** - Live position tracking and wait time estimates
+- **🔔 Smart Notifications** - SMS alerts when it's your turn
+- **📍 Location Awareness** - Find nearby businesses with active queues
+- **⭐ Review System** - Rate and review your experience
 
-### For Businesses
-- **Queue Management**: Control capacity and reduce no-shows
-- **Customer Analytics**: Insights into customer behavior and wait times
-- **Service Configuration**: Manage multiple services and pricing
-- **Real-time Dashboard**: Monitor queue status and customer flow
+### 🏢 **For Businesses**
+- **📊 Comprehensive Dashboard** - Real-time queue monitoring and analytics
+- **👨‍💼 Staff Management** - Role-based access, scheduling, and performance tracking
+- **📈 Advanced Analytics** - Customer insights, peak hours, revenue tracking
+- **🔧 Queue Customization** - Multiple queues, service types, and capacity management
+- **📱 Multi-Platform Support** - Web, mobile, and tablet interfaces
+- **🎨 Brand Integration** - Custom branding and white-label solutions
 
-## 🛠️ Tech Stack
+### 🚀 **Advanced Capabilities**
+- **⚡ Real-Time WebSocket** - Instant updates across all connected devices
+- **🤖 AI-Powered Insights** - Predictive analytics and optimization suggestions
+- **🔗 API Integration** - RESTful APIs for third-party integrations
+- **🌐 Multi-Language Support** - Localization for global markets
+- **🔒 Enterprise Security** - End-to-end encryption and compliance ready
 
-- **Frontend**: Ionic React + TypeScript
-- **Mobile**: Capacitor (iOS/Android)
-- **State Management**: React Context + Reducers
-- **Styling**: CSS Custom Properties + Ionic Components
-- **Build Tool**: Vite
-- **Testing**: Cypress (E2E) + Vitest (Unit)
+## 🏗️ **Architecture**
+
+### **Frontend Stack**
+- **⚛️ React 18** with TypeScript for type safety
+- **📱 Ionic Framework** for cross-platform mobile development
+- **🎨 Custom Design System** with QHop brand identity
+- **📊 Chart.js** for advanced analytics visualization
+- **🔌 Socket.io Client** for real-time communication
+
+### **Backend Stack**
+- **🟢 Node.js + Express** with TypeScript
+- **🐘 PostgreSQL** with Prisma ORM for type-safe database operations
+- **🔴 Redis** for caching and session management
+- **📡 Socket.io** for real-time WebSocket communication
+- **🔐 JWT Authentication** with role-based access control
+- **📱 Twilio SMS** for OTP and notifications
+
+### **DevOps & Deployment**
+- **🐳 Docker** containerization for consistent deployments
+- **⚙️ GitHub Actions** for CI/CD automation
+- **🌐 GitHub Pages** for frontend hosting
+- **☁️ Cloud-Ready** for AWS, Azure, or Google Cloud deployment
 
 ## 📱 Platform Support
 
@@ -40,51 +64,105 @@ A cross-platform SaaS (mobile-first) that replaces physical queues with smart, v
 - 🔄 **iOS** (Capacitor - Coming Soon)
 - ✅ **Web** (PWA)
 
-## 🎨 Design System
+## 🎨 **Design System**
 
-QHop implements a comprehensive design system with:
-- **Brand Colors**: Primary Blue (#0B72E7), Accent Green (#22C55E)
-- **Typography**: Inter + Sora font families
-- **Components**: QHopCard, QHopButton, QHopBadge, QHopProgress
-- **Spacing**: 4pt grid system
-- **Dark Mode**: Automatic system preference support
+QHop uses a comprehensive design system built on Ionic's design tokens:
 
-## 🚀 Getting Started
+### **Color Palette**
+- **Primary**: `#FF8A3D` (Vibrant Orange) - Energy, enthusiasm, action
+- **Secondary**: `#4ECDC4` (Teal) - Trust, reliability, professionalism
+- **Accent**: `#45B7D1` (Sky Blue) - Innovation, clarity, communication
+- **Success**: `#96CEB4` (Mint Green) - Success, completion, positive outcomes
+- **Warning**: `#FFEAA7` (Warm Yellow) - Attention, caution, important information
+- **Danger**: `#FD79A8` (Soft Pink) - Errors, urgent actions, critical alerts
 
-### Prerequisites
-- Node.js 18+ 
-- npm or yarn
-- Android Studio (for Android development)
-- Xcode (for iOS development)
+### **Typography**
+- **Primary Font**: Inter (Modern, clean, highly legible)
+- **Headings**: 600-700 weight for strong hierarchy
+- **Body Text**: 400-500 weight for optimal readability
 
-### Installation
+### **Component Library**
+All components follow QHop's design principles with consistent spacing, typography, and interaction patterns.
 
+## 🚀 **Quick Start**
+
+### **Prerequisites**
+- Node.js 18+ and npm
+- PostgreSQL 14+
+- Redis 6+
+- Git
+
+### **1. Clone the Repository**
 ```bash
-# Clone the repository
 git clone https://github.com/yourusername/qhop.git
 cd qhop
+```
 
-# Install dependencies
+### **2. Install Dependencies**
+```bash
+# Install frontend dependencies
 npm install
 
-# Start development server
+# Install backend dependencies
+cd backend
+npm install
+cd ..
+```
+
+### **3. Environment Setup**
+```bash
+# Copy environment files
+cp .env.example .env.local
+cp backend/.env.example backend/.env
+
+# Configure your environment variables
+# - Database connection strings
+# - Redis configuration
+# - Twilio credentials
+# - JWT secrets
+```
+
+### **4. Database Setup**
+```bash
+cd backend
+npx prisma migrate dev
+npx prisma db seed
+cd ..
+```
+
+### **5. Start Development Servers**
+```bash
+# Terminal 1: Start backend server
+cd backend
+npm run dev
+
+# Terminal 2: Start frontend development server
 npm run dev
 ```
 
-### Mobile Development
+### **6. Access the Application**
+- **Frontend**: http://localhost:3000
+- **Backend API**: http://localhost:3001
+- **API Documentation**: http://localhost:3001/docs
 
+## 📱 **Mobile Development**
+
+### **iOS Development**
 ```bash
-# Build the app
+# Build for iOS
 npm run build
-
-# Add platforms
-npx cap add android
 npx cap add ios
+npx cap sync ios
+npx cap open ios
+```
 
-# Sync and run
-npx cap sync
-npx cap run android
-npx cap run ios
+### **Android Development**
+```bash
+# Build for Android
+npm run build
+npx cap add android
+npx cap sync android
+npx cap open android
 ```
 
 ## 📂 Project Structure
@@ -120,14 +198,18 @@ npm run lint
 
 See [ANDROID_SETUP.md](./ANDROID_SETUP.md) for detailed Android development instructions.
 
-## 🔄 Development Status
+## 🔄 **Development Status**
 
-- ✅ **Design System**: Complete
-- ✅ **Customer App**: 95% Complete
-- 🔄 **Business App**: In Progress
-- 🔄 **Backend API**: Planned
-- 🔄 **Authentication**: Planned
-- 🔄 **Payment Integration**: Planned
+- ✅ **Design System**: Complete with comprehensive brand identity
+- ✅ **Customer App**: Complete with phone-based OTP authentication
+- ✅ **Business Dashboard**: Complete with dual-mode architecture
+- ✅ **Backend API**: Complete with Node.js + TypeScript + PostgreSQL
+- ✅ **Real-Time Features**: Complete with WebSocket integration
+- ✅ **Advanced Analytics**: Complete with Chart.js visualizations
+- ✅ **Staff Management**: Complete with role-based permissions
+- ✅ **Authentication**: Complete with JWT + OTP system
+- 🔄 **Payment Integration**: Planned for Phase 4
+- 🔄 **AI Features**: Planned for Phase 4
 
 ## 🤝 Contributing
 

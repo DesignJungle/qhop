@@ -19,6 +19,8 @@ import Notifications from './pages/Notifications';
 import Profile from './pages/Profile';
 import BusinessDetail from './pages/BusinessDetail';
 import BusinessDashboard from './pages/BusinessDashboard';
+import AdvancedAnalytics from './pages/AdvancedAnalytics';
+import StaffManagement from './pages/StaffManagement';
 import AuthContainer from './components/auth/AuthContainer';
 import BusinessLogin from './components/auth/BusinessLogin';
 import { QHopProvider, useQHop } from './contexts/QHopContext';
@@ -115,6 +117,12 @@ const AppContent: React.FC = () => {
         <IonRouterOutlet>
           <Route exact path="/business/dashboard">
             <BusinessDashboard />
+          </Route>
+          <Route exact path="/advanced-analytics">
+            <AdvancedAnalytics />
+          </Route>
+          <Route exact path="/staff-management">
+            <StaffManagement />
           </Route>
           <Route exact path="/">
             <Redirect to="/business/dashboard" />

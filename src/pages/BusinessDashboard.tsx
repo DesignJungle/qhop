@@ -249,14 +249,31 @@ const BusinessDashboard: React.FC = () => {
                         Call Next Customer
                       </IonButton>
 
-                      <IonButton expand="block" fill="outline" color="medium" className="qhop-button">
-                        <IonIcon icon={settingsOutline} slot="start" />
-                        Queue Settings
+                      <IonButton
+                        expand="block"
+                        fill="outline"
+                        color="secondary"
+                        className="qhop-button"
+                        onClick={() => window.location.href = '/advanced-analytics'}
+                      >
+                        <IonIcon icon={analyticsOutline} slot="start" />
+                        Advanced Analytics
+                      </IonButton>
+
+                      <IonButton
+                        expand="block"
+                        fill="outline"
+                        color="tertiary"
+                        className="qhop-button"
+                        onClick={() => window.location.href = '/staff-management'}
+                      >
+                        <IonIcon icon={personAddOutline} slot="start" />
+                        Staff Management
                       </IonButton>
 
                       <IonButton expand="block" fill="outline" color="medium" className="qhop-button">
-                        <IonIcon icon={personAddOutline} slot="start" />
-                        Add Staff Member
+                        <IonIcon icon={settingsOutline} slot="start" />
+                        Queue Settings
                       </IonButton>
                     </div>
                   </IonCardContent>

@@ -1,0 +1,345 @@
+/* Advanced Analytics Styles */
+
+.analytics-header {
+  background: linear-gradient(135deg, var(--qhop-primary) 0%, var(--qhop-secondary) 100%);
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+.analytics-header ion-segment {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  backdrop-filter: blur(10px);
+}
+
+.analytics-header ion-segment-button {
+  color: rgba(255, 255, 255, 0.8);
+  font-weight: 500;
+}
+
+.analytics-header ion-segment-button.segment-button-checked {
+  color: var(--qhop-primary);
+  background: rgba(255, 255, 255, 0.95);
+}
+
+.analytics-controls {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.analytics-controls ion-select {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  color: white;
+  min-width: 150px;
+}
+
+.analytics-controls ion-button {
+  --color: white;
+  --border-color: rgba(255, 255, 255, 0.3);
+}
+
+.analytics-content {
+  padding: 0 1rem 2rem;
+}
+
+.analytics-card {
+  margin-bottom: 1rem;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.analytics-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+}
+
+.analytics-metric {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.metric-icon {
+  font-size: 2.5rem;
+  padding: 1rem;
+  border-radius: 16px;
+  background: linear-gradient(135deg, var(--ion-color-primary-tint), var(--ion-color-primary));
+  color: white;
+  min-width: 4rem;
+  min-height: 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.metric-icon.customers {
+  background: linear-gradient(135deg, var(--qhop-primary), var(--qhop-primary-dark));
+}
+
+.metric-icon.wait-time {
+  background: linear-gradient(135deg, var(--qhop-warning), var(--qhop-warning-dark));
+}
+
+.metric-icon.satisfaction {
+  background: linear-gradient(135deg, var(--qhop-success), var(--qhop-success-dark));
+}
+
+.metric-icon.no-show {
+  background: linear-gradient(135deg, var(--qhop-danger), var(--qhop-danger-dark));
+}
+
+.metric-content {
+  flex: 1;
+}
+
+.metric-content h2 {
+  margin: 0;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--ion-color-dark);
+  line-height: 1.2;
+}
+
+.metric-content p {
+  margin: 0.25rem 0 0.5rem;
+  color: var(--ion-color-medium);
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.metric-content ion-chip {
+  margin: 0;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.chart-container {
+  height: 300px;
+  position: relative;
+  margin: 1rem 0;
+}
+
+.chart-container canvas {
+  border-radius: 8px;
+}
+
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 50vh;
+  gap: 1rem;
+}
+
+.loading-container p {
+  color: var(--ion-color-medium);
+  font-size: 1rem;
+}
+
+.queue-performance-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  gap: 1rem;
+}
+
+.queue-info {
+  flex: 1;
+}
+
+.queue-info h3 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--ion-color-dark);
+}
+
+.queue-info p {
+  margin: 0.25rem 0 0;
+  font-size: 0.85rem;
+  color: var(--ion-color-medium);
+}
+
+.queue-metrics {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.5rem;
+  min-width: 100px;
+}
+
+.queue-metrics ion-progress-bar {
+  width: 80px;
+  height: 6px;
+  border-radius: 3px;
+}
+
+.queue-metrics ion-badge {
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.service-revenue-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  gap: 1rem;
+}
+
+.service-info {
+  flex: 1;
+}
+
+.service-info h3 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--ion-color-dark);
+}
+
+.service-info p {
+  margin: 0.25rem 0 0;
+  font-size: 0.85rem;
+  color: var(--ion-color-medium);
+}
+
+.service-revenue {
+  text-align: right;
+}
+
+.service-revenue h3 {
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.service-revenue p {
+  margin: 0.25rem 0 0;
+  font-size: 0.8rem;
+  color: var(--ion-color-medium);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .analytics-header {
+    padding: 0.75rem;
+  }
+  
+  .analytics-controls {
+    justify-content: center;
+    margin-top: 1rem;
+  }
+  
+  .analytics-controls ion-select {
+    min-width: 120px;
+  }
+  
+  .metric-icon {
+    font-size: 2rem;
+    min-width: 3rem;
+    min-height: 3rem;
+  }
+  
+  .metric-content h2 {
+    font-size: 1.5rem;
+  }
+  
+  .chart-container {
+    height: 250px;
+  }
+  
+  .queue-performance-item,
+  .service-revenue-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+  
+  .queue-metrics,
+  .service-revenue {
+    align-self: stretch;
+    text-align: left;
+  }
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+  .analytics-card {
+    background: var(--ion-color-step-50);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  }
+  
+  .analytics-card:hover {
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+  }
+  
+  .metric-content h2 {
+    color: var(--ion-color-dark-contrast);
+  }
+  
+  .queue-info h3,
+  .service-info h3 {
+    color: var(--ion-color-dark-contrast);
+  }
+}
+
+/* Animation Classes */
+.fade-in {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.slide-up {
+  animation: slideUp 0.3s ease-out;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Chart Customizations */
+.chart-container .chartjs-tooltip {
+  background: rgba(0, 0, 0, 0.8);
+  border-radius: 8px;
+  color: white;
+  font-family: 'Inter', sans-serif;
+}
+
+.chart-container .chartjs-legend {
+  font-family: 'Inter', sans-serif;
+}
+
+/* Export Button Styles */
+.analytics-controls ion-button[fill="outline"] {
+  --border-width: 1.5px;
+  --border-style: solid;
+  font-weight: 500;
+}
+
+.analytics-controls ion-button[fill="outline"]:hover {
+  --background: rgba(255, 255, 255, 0.1);
+}

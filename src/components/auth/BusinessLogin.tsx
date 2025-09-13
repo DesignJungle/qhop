@@ -22,7 +22,8 @@ import {
   eyeOffOutline 
 } from 'ionicons/icons';
 import QHopLogo from '../brand/QHopLogo';
-import { businessService, type BusinessOwner } from '../../services/BusinessService';
+import { authService } from '../../services/AuthService';
+import { type BusinessOwner } from '../../services/ApiService';
 import './BusinessLogin.css';
 
 interface BusinessLoginProps {
@@ -55,20 +56,21 @@ const BusinessLogin: React.FC<BusinessLoginProps> = ({
     setError('');
 
     try {
-      const owner = await businessService.authenticateBusinessOwner(email, password);
-      
+      const session = await authService.businessLogin(email, password);
+      const owner = authService.getCurrentBusinessOwner();
+
       if (owner) {
         if (rememberMe) {
           localStorage.setItem('qhop_business_owner', JSON.stringify(owner));
         }
         onLoginSuccess(owner);
       } else {
-        setError('Invalid email or password');
+        setError('Failed to get business owner information');
         setShowToast(true);
       }
-    } catch (error) {
+    } catch (error: any) {
       console.error('Business login error:', error);
-      setError('Login failed. Please try again.');
+      setError(error.message || 'Login failed. Please try again.');
       setShowToast(true);
     } finally {
       setIsLoading(false);

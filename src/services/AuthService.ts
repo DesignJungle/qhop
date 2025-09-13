@@ -1,7 +1,9 @@
 /**
- * Authentication Service for QHop
+ * Authentication Service for QHop - Real API Integration
  * Handles phone-based OTP authentication, user sessions, and profile management
  */
+
+import { apiService, type User as ApiUser, type BusinessOwner, type ApiResponse } from './ApiService';
 
 export interface User {
   id: string;
@@ -46,36 +48,32 @@ export interface ProfileUpdate {
 
 class AuthService {
   private readonly STORAGE_KEY = 'qhop_auth_session';
-  private readonly OTP_EXPIRY_MINUTES = 5;
   private currentSession: AuthSession | null = null;
-  
-  // Mock OTP storage for development
-  private mockOTPs: Map<string, { otp: string; expiresAt: Date; sessionId: string }> = new Map();
-  private mockUsers: Map<string, User> = new Map();
+  private currentUser: User | null = null;
+  private currentBusinessOwner: BusinessOwner | null = null;
+  private userType: 'customer' | 'business' | null = null;
 
   constructor() {
-    this.initializeMockData();
     this.loadStoredSession();
   }
 
-  private initializeMockData() {
-    // Create some mock users for development
-    const mockUser: User = {
-      id: 'user-1',
-      phone: '+2348012345678',
-      name: 'John Doe',
-      email: 'john.doe@example.com',
-      isVerified: true,
-      createdAt: new Date().toISOString(),
-      lastLoginAt: new Date().toISOString(),
-      preferences: {
-        notifications: true,
-        darkMode: false,
-        language: 'en'
+  // Initialize and verify existing session
+  private async initializeSession(): Promise<void> {
+    const token = apiService.getToken();
+    if (token) {
+      const result = await apiService.verifyToken();
+      if (result.success) {
+        if (result.data?.type === 'customer' && result.data.user) {
+          this.currentUser = this.mapApiUserToUser(result.data.user);
+          this.userType = 'customer';
+        } else if (result.data?.type === 'business' && result.data.owner) {
+          this.currentBusinessOwner = result.data.owner;
+          this.userType = 'business';
+        }
+      } else {
+        this.clearSession();
       }
-    };
-    
-    this.mockUsers.set(mockUser.phone, mockUser);
+    }
   }
 
   private loadStoredSession() {
@@ -149,100 +147,81 @@ class AuthService {
    * Request OTP for phone number
    */
   async requestOTP(request: OTPRequest): Promise<{ sessionId: string; expiresIn: number }> {
-    await this.delay(1000); // Simulate network delay
-
     const fullPhone = `${request.countryCode}${request.phone}`;
-    const otp = this.generateOTP();
-    const sessionId = this.generateSessionId();
-    const expiresAt = new Date(Date.now() + this.OTP_EXPIRY_MINUTES * 60 * 1000);
 
-    // Store OTP for verification
-    this.mockOTPs.set(fullPhone, { otp, expiresAt, sessionId });
+    const result = await apiService.requestOTP(fullPhone);
 
-    // In production, this would send SMS via service like Twilio
-    console.log(`🔐 OTP for ${fullPhone}: ${otp} (expires in ${this.OTP_EXPIRY_MINUTES} minutes)`);
-
-    return {
-      sessionId,
-      expiresIn: this.OTP_EXPIRY_MINUTES * 60
-    };
+    if (result.success && result.data) {
+      return {
+        sessionId: result.data.sessionId,
+        expiresIn: result.data.expiresIn
+      };
+    } else {
+      throw new Error(result.error || result.message || 'Failed to send OTP');
+    }
   }
 
   /**
    * Verify OTP and authenticate user
    */
   async verifyOTP(verification: OTPVerification): Promise<AuthSession> {
-    await this.delay(800);
+    const result = await apiService.verifyOTP(verification.sessionId, verification.otp, verification.name);
 
-    const fullPhone = verification.phone;
-    const storedOTP = this.mockOTPs.get(fullPhone);
+    if (result.success && result.data) {
+      const user = this.mapApiUserToUser(result.data.user);
+      this.currentUser = user;
+      this.userType = 'customer';
 
-    if (!storedOTP) {
-      throw new Error('No OTP found for this phone number');
-    }
-
-    if (storedOTP.sessionId !== verification.sessionId) {
-      throw new Error('Invalid session');
-    }
-
-    if (new Date() > storedOTP.expiresAt) {
-      this.mockOTPs.delete(fullPhone);
-      throw new Error('OTP has expired');
-    }
-
-    if (storedOTP.otp !== verification.otp) {
-      throw new Error('Invalid OTP');
-    }
-
-    // OTP verified successfully
-    this.mockOTPs.delete(fullPhone);
-
-    // Get or create user
-    let user = this.mockUsers.get(fullPhone);
-    if (!user) {
-      // Create new user
-      user = {
-        id: `user_${Date.now()}`,
-        phone: fullPhone,
-        isVerified: true,
-        createdAt: new Date().toISOString(),
-        lastLoginAt: new Date().toISOString(),
-        preferences: {
-          notifications: true,
-          darkMode: false,
-          language: 'en'
-        }
+      // Create session
+      const session: AuthSession = {
+        token: result.data.token,
+        refreshToken: result.data.token, // Using same token for now
+        expiresAt: new Date(Date.now() + result.data.expiresIn * 1000).toISOString(),
+        user
       };
-      this.mockUsers.set(fullPhone, user);
+
+      this.storeSession(session);
+      return session;
     } else {
-      // Update last login
-      user.lastLoginAt = new Date().toISOString();
-      this.mockUsers.set(fullPhone, user);
+      throw new Error(result.error || result.message || 'Failed to verify OTP');
     }
+  }
 
-    // Create session
-    const session: AuthSession = {
-      token: `token_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
-      refreshToken: `refresh_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
-      expiresAt: new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString(), // 24 hours
-      user
-    };
+  /**
+   * Business owner login
+   */
+  async businessLogin(email: string, password: string): Promise<AuthSession> {
+    const result = await apiService.businessLogin(email, password);
 
-    this.storeSession(session);
-    return session;
+    if (result.success && result.data) {
+      this.currentBusinessOwner = result.data.owner;
+      this.userType = 'business';
+
+      // Create session for business owner
+      const session: AuthSession = {
+        token: result.data.token,
+        refreshToken: result.data.token,
+        expiresAt: new Date(Date.now() + result.data.expiresIn * 1000).toISOString(),
+        user: this.mapBusinessOwnerToUser(result.data.owner)
+      };
+
+      this.storeSession(session);
+      return session;
+    } else {
+      throw new Error(result.error || result.message || 'Failed to login');
+    }
   }
 
   /**
    * Update user profile
    */
   async updateProfile(updates: ProfileUpdate): Promise<User> {
-    await this.delay(500);
-
     const session = this.getCurrentSession();
     if (!session) {
       throw new Error('Not authenticated');
     }
 
+    // For now, just update locally - in production this would call API
     const updatedUser: User = {
       ...session.user,
       ...updates,
@@ -252,10 +231,6 @@ class AuthService {
       }
     };
 
-    // Update stored user
-    this.mockUsers.set(updatedUser.phone, updatedUser);
-
-    // Update session
     const updatedSession: AuthSession = {
       ...session,
       user: updatedUser
@@ -269,16 +244,15 @@ class AuthService {
    * Refresh authentication token
    */
   async refreshToken(): Promise<AuthSession> {
-    await this.delay(300);
-
     const session = this.getCurrentSession();
     if (!session) {
       throw new Error('No active session to refresh');
     }
 
+    // For now, just extend the current session
+    // In production, this would call the API to refresh the token
     const refreshedSession: AuthSession = {
       ...session,
-      token: `token_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
       expiresAt: new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString()
     };
 
@@ -295,19 +269,79 @@ class AuthService {
   }
 
   /**
-   * Delete user account
+   * Logout user
    */
-  async deleteAccount(): Promise<void> {
-    await this.delay(1000);
+  async logout(): Promise<void> {
+    await apiService.logout();
+    this.clearSession();
+  }
 
-    const session = this.getCurrentSession();
-    if (!session) {
-      throw new Error('Not authenticated');
-    }
+  /**
+   * Get current user type
+   */
+  getUserType(): 'customer' | 'business' | null {
+    return this.userType;
+  }
 
-    // Remove user data
-    this.mockUsers.delete(session.user.phone);
+  /**
+   * Get current business owner
+   */
+  getCurrentBusinessOwner(): BusinessOwner | null {
+    return this.currentBusinessOwner;
+  }
+
+  /**
+   * Clear all session data
+   */
+  private clearSession(): void {
+    this.currentSession = null;
+    this.currentUser = null;
+    this.currentBusinessOwner = null;
+    this.userType = null;
     this.clearStoredSession();
+    apiService.clearToken();
+  }
+
+  /**
+   * Map API user to local user interface
+   */
+  private mapApiUserToUser(apiUser: ApiUser): User {
+    return {
+      id: apiUser.id,
+      phone: apiUser.phone,
+      name: apiUser.name,
+      email: apiUser.email,
+      avatar: apiUser.avatar,
+      isVerified: apiUser.isVerified,
+      createdAt: new Date().toISOString(),
+      lastLoginAt: new Date().toISOString(),
+      preferences: {
+        notifications: true,
+        darkMode: false,
+        language: 'en'
+      }
+    };
+  }
+
+  /**
+   * Map business owner to user interface for session compatibility
+   */
+  private mapBusinessOwnerToUser(owner: BusinessOwner): User {
+    return {
+      id: owner.id,
+      phone: owner.phone,
+      name: owner.name,
+      email: owner.email,
+      avatar: undefined,
+      isVerified: true,
+      createdAt: new Date().toISOString(),
+      lastLoginAt: new Date().toISOString(),
+      preferences: {
+        notifications: true,
+        darkMode: false,
+        language: 'en'
+      }
+    };
   }
 }
 

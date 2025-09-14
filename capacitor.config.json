@@ -1,0 +1,8 @@
+{
+  "appId": "com.qhop.app",
+  "appName": "QHop",
+  "webDir": "dist",
+  "server": {
+    "androidScheme": "https"
+  }
+}

@@ -37,6 +37,7 @@ export interface OTPVerification {
   phone: string;
   otp: string;
   sessionId: string;
+  name?: string;
 }
 
 export interface ProfileUpdate {
@@ -258,14 +259,6 @@ class AuthService {
 
     this.storeSession(refreshedSession);
     return refreshedSession;
-  }
-
-  /**
-   * Logout user
-   */
-  async logout(): Promise<void> {
-    await this.delay(200);
-    this.clearStoredSession();
   }
 
   /**

@@ -20,20 +20,21 @@ interface User {
   isVerified: boolean;
 }
 
+interface BusinessPermission {
+  businessId: string;
+  permissions: ('manage_queue' | 'view_analytics' | 'manage_staff' | 'manage_settings')[];
+}
+
 interface BusinessOwner {
   id: string;
   name: string;
   email: string;
   phone: string;
-  role: string;
-  business: {
-    id: string;
-    name: string;
-    category: string;
-    address: string;
-    phone: string;
-    isActive: boolean;
-  };
+  role: 'owner' | 'manager' | 'staff';
+  businessIds: string[];
+  permissions: BusinessPermission[];
+  createdAt: string;
+  lastLogin: string;
 }
 
 interface Ticket {

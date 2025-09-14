@@ -78,3 +78,132 @@
 .qhop-logo-fade-in {
   animation: qhop-logo-fade-in 0.6s ease-out;
 }
+
+/* Enhanced logo animations for new design */
+.qhop-logo-icon {
+  transition: transform 0.3s ease;
+}
+
+.qhop-logo-icon:hover {
+  transform: scale(1.05);
+}
+
+/* Background pulse animation */
+.qhop-logo-bg {
+  animation: qhop-bg-pulse 3s ease-in-out infinite;
+}
+
+@keyframes qhop-bg-pulse {
+  0%, 100% {
+    transform: scale(1);
+    filter: brightness(1);
+  }
+  50% {
+    transform: scale(1.02);
+    filter: brightness(1.1);
+  }
+}
+
+/* Highlight ring rotation */
+.qhop-logo-highlight {
+  animation: qhop-highlight-rotate 8s linear infinite;
+  transform-origin: 50% 50%;
+}
+
+@keyframes qhop-highlight-rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* People queue animation */
+.qhop-logo-people {
+  animation: qhop-people-wave 4s ease-in-out infinite;
+}
+
+.qhop-person-1 {
+  animation: qhop-person-bounce 2s ease-in-out infinite;
+  animation-delay: 0s;
+}
+
+.qhop-person-2 {
+  animation: qhop-person-bounce 2s ease-in-out infinite;
+  animation-delay: 0.3s;
+}
+
+.qhop-person-3 {
+  animation: qhop-person-bounce 2s ease-in-out infinite;
+  animation-delay: 0.6s;
+}
+
+@keyframes qhop-person-bounce {
+  0%, 100% {
+    transform: translateY(0);
+    opacity: 0.8;
+  }
+  50% {
+    transform: translateY(-2px);
+    opacity: 1;
+  }
+}
+
+/* Action icon pulse */
+.qhop-action-icon {
+  animation: qhop-action-pulse 2s ease-in-out infinite;
+}
+
+.qhop-action-bg {
+  animation: qhop-action-glow 1.5s ease-in-out infinite alternate;
+}
+
+@keyframes qhop-action-pulse {
+  0%, 100% {
+    transform: translate(68px, 68px) scale(1);
+  }
+  50% {
+    transform: translate(68px, 68px) scale(1.1);
+  }
+}
+
+@keyframes qhop-action-glow {
+  from {
+    filter: brightness(1);
+  }
+  to {
+    filter: brightness(1.2) drop-shadow(0 0 8px rgba(253, 121, 168, 0.4));
+  }
+}
+
+/* Flow lines animation */
+.qhop-flow-lines {
+  animation: qhop-flow 3s ease-in-out infinite;
+}
+
+@keyframes qhop-flow {
+  0%, 100% {
+    opacity: 0.2;
+    stroke-dashoffset: 0;
+  }
+  50% {
+    opacity: 0.6;
+    stroke-dashoffset: 4;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .qhop-logo-bg,
+  .qhop-logo-highlight,
+  .qhop-logo-people,
+  .qhop-person-1,
+  .qhop-person-2,
+  .qhop-person-3,
+  .qhop-action-icon,
+  .qhop-action-bg,
+  .qhop-flow-lines {
+    animation: none;
+  }
+
+  .qhop-logo-icon:hover {
+    transform: none;
+  }
+}

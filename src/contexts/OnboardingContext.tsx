@@ -4,6 +4,13 @@ interface OnboardingState {
   hasSeenSplash: boolean;
   hasCompletedOnboarding: boolean;
   isFirstLaunch: boolean;
+  userPreferences: {
+    enableHaptics: boolean;
+    enableAnimations: boolean;
+    preferredTheme: 'auto' | 'light' | 'dark';
+  };
+  onboardingCompletedAt?: string;
+  appVersion: string;
 }
 
 interface OnboardingContextType {
@@ -12,6 +19,8 @@ interface OnboardingContextType {
     completeSplash: () => void;
     completeOnboarding: () => void;
     resetOnboarding: () => void;
+    updatePreferences: (preferences: Partial<OnboardingState['userPreferences']>) => void;
+    triggerHaptic: (type?: 'light' | 'medium' | 'heavy') => void;
   };
 }
 
@@ -27,7 +36,13 @@ export const OnboardingProvider: React.FC<OnboardingProviderProps> = ({ children
   const [state, setState] = useState<OnboardingState>({
     hasSeenSplash: false,
     hasCompletedOnboarding: false,
-    isFirstLaunch: true
+    isFirstLaunch: true,
+    userPreferences: {
+      enableHaptics: true,
+      enableAnimations: true,
+      preferredTheme: 'auto'
+    },
+    appVersion: '1.0.0'
   });
 
   // Load onboarding state from localStorage on mount
@@ -40,7 +55,14 @@ export const OnboardingProvider: React.FC<OnboardingProviderProps> = ({ children
           setState({
             hasSeenSplash: parsedState.hasSeenSplash || false,
             hasCompletedOnboarding: parsedState.hasCompletedOnboarding || false,
-            isFirstLaunch: parsedState.isFirstLaunch !== false // Default to true if not set
+            isFirstLaunch: parsedState.isFirstLaunch !== false, // Default to true if not set
+            userPreferences: {
+              enableHaptics: parsedState.userPreferences?.enableHaptics ?? true,
+              enableAnimations: parsedState.userPreferences?.enableAnimations ?? true,
+              preferredTheme: parsedState.userPreferences?.preferredTheme ?? 'auto'
+            },
+            onboardingCompletedAt: parsedState.onboardingCompletedAt,
+            appVersion: parsedState.appVersion || '1.0.0'
           });
         }
       } catch (error) {
@@ -72,15 +94,59 @@ export const OnboardingProvider: React.FC<OnboardingProviderProps> = ({ children
     setState(prev => ({
       ...prev,
       hasCompletedOnboarding: true,
-      isFirstLaunch: false
+      isFirstLaunch: false,
+      onboardingCompletedAt: new Date().toISOString()
     }));
+  };
+
+  const updatePreferences = (preferences: Partial<OnboardingState['userPreferences']>) => {
+    setState(prev => ({
+      ...prev,
+      userPreferences: {
+        ...prev.userPreferences,
+        ...preferences
+      }
+    }));
+  };
+
+  const triggerHaptic = (type: 'light' | 'medium' | 'heavy' = 'light') => {
+    if (!state.userPreferences.enableHaptics) return;
+
+    try {
+      // Check if we're in a Capacitor environment
+      if ((window as any).Capacitor) {
+        import('@capacitor/haptics').then(({ Haptics, ImpactStyle }) => {
+          const impactStyle = type === 'light' ? ImpactStyle.Light :
+                             type === 'medium' ? ImpactStyle.Medium : ImpactStyle.Heavy;
+          Haptics.impact({ style: impactStyle });
+        }).catch(() => {
+          // Fallback for web
+          if (navigator.vibrate) {
+            const duration = type === 'light' ? 10 : type === 'medium' ? 20 : 50;
+            navigator.vibrate(duration);
+          }
+        });
+      } else if (navigator.vibrate) {
+        // Web vibration API
+        const duration = type === 'light' ? 10 : type === 'medium' ? 20 : 50;
+        navigator.vibrate(duration);
+      }
+    } catch (error) {
+      console.warn('Haptic feedback not available:', error);
+    }
   };
 
   const resetOnboarding = () => {
     setState({
       hasSeenSplash: false,
       hasCompletedOnboarding: false,
-      isFirstLaunch: true
+      isFirstLaunch: true,
+      userPreferences: {
+        enableHaptics: true,
+        enableAnimations: true,
+        preferredTheme: 'auto'
+      },
+      appVersion: '1.0.0'
     });
     try {
       localStorage.removeItem(ONBOARDING_STORAGE_KEY);
@@ -94,7 +160,9 @@ export const OnboardingProvider: React.FC<OnboardingProviderProps> = ({ children
     actions: {
       completeSplash,
       completeOnboarding,
-      resetOnboarding
+      resetOnboarding,
+      updatePreferences,
+      triggerHaptic
     }
   };
 

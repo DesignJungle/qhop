@@ -31,7 +31,7 @@ const QHopLogo: React.FC<QHopLogoProps> = ({
   const iconSize = logoSize;
   const fullWidth = variant === 'full' ? logoSize * 2.5 : logoSize;
 
-  // SVG recreation of your logo design
+  // New QHop logo design with queue management theme
   const LogoIcon = () => (
     <svg
       width={iconSize}
@@ -40,47 +40,57 @@ const QHopLogo: React.FC<QHopLogoProps> = ({
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      {/* Outer ring with gradient */}
       <defs>
         <linearGradient id="qhop-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor="var(--qhop-primary-600)" />
-          <stop offset="50%" stopColor="var(--qhop-accent-500)" />
-          <stop offset="100%" stopColor="var(--qhop-primary-600)" />
+          <stop offset="0%" stopColor="#1DD1A1" />
+          <stop offset="50%" stopColor="#10AC84" />
+          <stop offset="100%" stopColor="#0984e3" />
         </linearGradient>
         <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
           <feDropShadow dx="0" dy="2" stdDeviation="3" floodColor="rgba(0,0,0,0.1)"/>
         </filter>
       </defs>
-      
-      {/* Main circular ring */}
+
+      {/* Main circular background */}
       <circle
         cx="50"
         cy="50"
-        r="40"
-        fill="none"
-        stroke="url(#qhop-gradient)"
-        strokeWidth="16"
-        strokeLinecap="round"
-        strokeDasharray="220 40"
-        transform="rotate(-45 50 50)"
+        r="45"
+        fill="url(#qhop-gradient)"
         filter="url(#shadow)"
       />
-      
-      {/* Inner circle (navy background) */}
+
+      {/* White inner circle */}
       <circle
         cx="50"
         cy="50"
-        r="25"
-        fill="var(--qhop-navy-800)"
+        r="35"
+        fill="white"
       />
-      
-      {/* Small accent dot */}
-      <circle
-        cx="75"
-        cy="65"
-        r="4"
-        fill="var(--qhop-primary-600)"
-      />
+
+      {/* Queue people icons */}
+      <g fill="#0984e3">
+        {/* Person 1 */}
+        <circle cx="35" cy="40" r="4" />
+        <rect x="31" y="45" width="8" height="10" rx="2" />
+
+        {/* Person 2 */}
+        <circle cx="50" cy="40" r="4" />
+        <rect x="46" y="45" width="8" height="10" rx="2" />
+
+        {/* Person 3 */}
+        <circle cx="65" cy="40" r="4" />
+        <rect x="61" y="45" width="8" height="10" rx="2" />
+      </g>
+
+      {/* Orange search/action icon */}
+      <g transform="translate(65, 65)">
+        <circle cx="0" cy="0" r="12" fill="#fd79a8" />
+        <g fill="white" transform="scale(0.8)">
+          <circle cx="-3" cy="-3" r="4" fill="none" stroke="white" strokeWidth="2" />
+          <line x1="2" y1="2" x2="6" y2="6" stroke="white" strokeWidth="2" strokeLinecap="round" />
+        </g>
+      </g>
     </svg>
   );
 

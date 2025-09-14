@@ -18,6 +18,9 @@ import Tickets from './pages/Tickets';
 import Notifications from './pages/Notifications';
 import Profile from './pages/Profile';
 import BusinessDetail from './pages/BusinessDetail';
+import SplashScreen from './pages/SplashScreen';
+import Onboarding from './pages/Onboarding';
+import { OnboardingProvider, useOnboarding } from './contexts/OnboardingContext';
 import BusinessDashboard from './pages/BusinessDashboard';
 import AdvancedAnalytics from './pages/AdvancedAnalytics';
 import StaffManagement from './pages/StaffManagement';
@@ -61,11 +64,22 @@ setupIonicReact();
 // App Mode Types
 type AppMode = 'customer' | 'business';
 
-// Main App Component with Mode Selection and Authentication
+// Main App Component with Onboarding, Mode Selection and Authentication
 const AppContent: React.FC = () => {
   const { state } = useQHop();
+  const { state: onboardingState, actions: onboardingActions } = useOnboarding();
   const [appMode, setAppMode] = useState<AppMode>('customer');
   const [businessOwner, setBusinessOwner] = useState<BusinessOwner | null>(null);
+
+  // Show splash screen first
+  if (!onboardingState.hasSeenSplash) {
+    return <SplashScreen onComplete={onboardingActions.completeSplash} />;
+  }
+
+  // Show onboarding if not completed
+  if (!onboardingState.hasCompletedOnboarding) {
+    return <Onboarding onComplete={onboardingActions.completeOnboarding} />;
+  }
 
   // Check for stored business owner session
   React.useEffect(() => {
@@ -196,9 +210,11 @@ const AppContent: React.FC = () => {
 
 const App: React.FC = () => (
   <IonApp>
-    <QHopProvider>
-      <AppContent />
-    </QHopProvider>
+    <OnboardingProvider>
+      <QHopProvider>
+        <AppContent />
+      </QHopProvider>
+    </OnboardingProvider>
   </IonApp>
 );
 

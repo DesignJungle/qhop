@@ -29,13 +29,16 @@ import {
   starOutline,
   timeOutline,
   chevronForwardOutline,
-  businessOutline
+  businessOutline,
+  playCircleOutline
 } from 'ionicons/icons';
 import { useQHop } from '../contexts/QHopContext';
+import { useOnboarding } from '../contexts/OnboardingContext';
 import './Profile.css';
 
 const Profile: React.FC = () => {
   const { state, actions } = useQHop();
+  const { actions: onboardingActions } = useOnboarding();
   const userStats = {
     totalVisits: 24,
     timeSaved: '4.2 hours',
@@ -62,6 +65,7 @@ const Profile: React.FC = () => {
     {
       section: 'Support',
       items: [
+        { icon: playCircleOutline, label: 'View Tutorial', subtitle: 'See the app introduction again', action: 'tutorial' },
         { icon: helpCircleOutline, label: 'Help & Support', action: 'help' },
         { icon: informationCircleOutline, label: 'About QHop', subtitle: 'Version 1.0.0', action: 'about' }
       ]
@@ -70,6 +74,13 @@ const Profile: React.FC = () => {
 
   const handleMenuAction = (action: string) => {
     console.log('Menu action:', action);
+
+    if (action === 'tutorial') {
+      // Reset onboarding to show tutorial again
+      onboardingActions.resetOnboarding();
+      return;
+    }
+
     // In a real app, this would navigate to the appropriate page
   };
 
